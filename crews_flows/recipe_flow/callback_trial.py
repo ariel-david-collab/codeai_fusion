@@ -17,7 +17,14 @@ from crewai.agents.parser import AgentFinish
 
 load_dotenv()
 
-llm = LLM(model="groq/gemma2-9b-it", api_key=os.environ["GROQ_API_KEY"])
+# Configurar LLM para CrewAI usando OpenRouter
+llm = LLM(
+    model="google/gemma-3-27b-it:free",
+    api_key="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",
+    base_url="https://openrouter.ai/api/v1",
+    custom_llm_provider="openrouter"
+)
+
 write_tool = FileWriterTool()
 
 
@@ -140,5 +147,5 @@ def test_callback():
 if __name__ == "__main__":
     print(getsource(TaskOutput))
     print(getsource(AgentFinish))
-    # result = test_callback()
-    # print("\nFinal Result:", result)
+    result = test_callback()
+    print("\nFinal Result:", result)
